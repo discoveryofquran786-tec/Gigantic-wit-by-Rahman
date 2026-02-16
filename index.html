@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gigantic Wit | Platinum Editor</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:wght@300;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-theme">
+
+    <div class="app-layout">
+        
+        <aside class="sidebar">
+            <div class="brand-header">
+                <div class="logo-icon"><i class="fas fa-brain"></i></div>
+                <div class="logo-text">
+                    <h2>Gigantic Wit</h2>
+                    <span>PRO WORKSPACE</span>
+                </div>
+            </div>
+
+            <nav class="menu">
+                <button class="menu-item active" onclick="app.newFile()">
+                    <i class="fas fa-plus-circle"></i> New Document
+                </button>
+                <button class="menu-item" onclick="document.getElementById('ocr-upload').click()">
+                    <i class="fas fa-camera"></i> Scan Image (OCR)
+                </button>
+                <button class="menu-item" onclick="app.toggleTheme()">
+                    <i class="fas fa-adjust"></i> Switch Theme
+                </button>
+                <div class="divider"></div>
+                <button class="menu-item" onclick="app.exportPDF()">
+                    <i class="fas fa-file-export"></i> Export PDF
+                </button>
+                <button class="menu-item danger" onclick="app.clearAll()">
+                    <i class="fas fa-trash-alt"></i> Destroy Data
+                </button>
+            </nav>
+
+            <div class="storage-widget">
+                <div class="storage-bar"><div class="storage-fill" id="storage-fill"></div></div>
+                <small id="storage-text">Storage: 0% used</small>
+            </div>
+        </aside>
+
+        <main class="main-canvas">
+            
+            <header class="toolbar">
+                <div class="tool-section">
+                    <select id="fontFamily" onchange="format('fontName', this.value)">
+                        <option value="Inter">Modern Sans</option>
+                        <option value="Merriweather">Classic Serif</option>
+                        <option value="Fira Code">Coding Mono</option>
+                        <option value="cursive">Handwritten</option>
+                    </select>
+                    <select id="fontSize" onchange="format('fontSize', this.value)">
+                        <option value="3">Normal</option>
+                        <option value="1">Small</option>
+                        <option value="5">Large</option>
+                        <option value="7">Huge</option>
+                    </select>
+                </div>
+
+                <div class="tool-section">
+                    <button class="btn-icon" onclick="format('bold')" title="Bold"><i class="fas fa-bold"></i></button>
+                    <button class="btn-icon" onclick="format('italic')" title="Italic"><i class="fas fa-italic"></i></button>
+                    <button class="btn-icon" onclick="format('underline')" title="Underline"><i class="fas fa-underline"></i></button>
+                </div>
+
+                <div class="tool-section">
+                    <div class="color-wrapper" title="Text Color">
+                        <i class="fas fa-font"></i>
+                        <input type="color" onchange="format('foreColor', this.value)" value="#333333">
+                    </div>
+                    <div class="color-wrapper" title="Highlight Color">
+                        <i class="fas fa-highlighter"></i>
+                        <input type="color" onchange="format('hiliteColor', this.value)" value="#ffff00">
+                    </div>
+                </div>
+
+                <div class="tool-section">
+                    <button class="btn-icon" onclick="format('justifyLeft')"><i class="fas fa-align-left"></i></button>
+                    <button class="btn-icon" onclick="format('justifyCenter')"><i class="fas fa-align-center"></i></button>
+                    <button class="btn-icon" onclick="format('justifyRight')"><i class="fas fa-align-right"></i></button>
+                </div>
+
+                <div class="status-indicator" id="save-status">
+                    <i class="fas fa-check-circle"></i> Saved
+                </div>
+            </header>
+
+            <div class="editor-scroll-area">
+                <div id="editor" class="paper-sheet" contenteditable="true" spellcheck="false">
+                    <h1 style="border-bottom: 2px solid #eee; padding-bottom: 10px;">Welcome to Gigantic Wit</h1>
+                    <p>This is the <b>Platinum Edition</b>. Start typing, changing colors, or scanning images.</p>
+                </div>
+            </div>
+
+            <footer class="bottom-bar">
+                <span>Words: <b id="word-count">0</b></span>
+                <span>Chars: <b id="char-count">0</b></span>
+                <span>By Abdul Rahman</span>
+            </footer>
+
+        </main>
+    </div>
+
+    <input type="file" id="ocr-upload" hidden accept="image/*">
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+  </html>
+  
